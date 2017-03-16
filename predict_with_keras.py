@@ -10,7 +10,7 @@ from keras import backend as K
 
 np.random.seed(1337)  # for reproducibility
 
-model_name = 'model.h5'
+model_name = 'keras_model.h5'
 nb_classes = 2
 nb_epoch = 128
 batch_size = 32
@@ -156,7 +156,7 @@ def build_submission(model):
     csv_input = csv_input.drop(['Pclass', 'Name', 'Sex', 'Age', 'SibSp',
                                 'Parch', 'Ticket', 'Fare', 'Cabin', 'Embarked'], axis=1)
     csv_input['Survived'] = prediction_bitarray
-    csv_input.to_csv('./data/prediction.csv', index=False)
+    csv_input.to_csv('./results/keras/prediction.csv', index=False)
 
 # model = load_model(model_name)
 model = build_model()
