@@ -1,6 +1,5 @@
 
-# Kaggle Titanic Problem with Keras MLP
-
+# Kaggle Titanic Problem with Keras
 
 ```
 conda create --name TitanicEnv
@@ -38,7 +37,6 @@ https://docs.google.com/spreadsheets/d/1OGfHeiLGkdHXvooDvZMt6yLnhiqyq1I-W569Mdt1
 ### Reading
 
 https://github.com/ChaseByInfinity/titanic-neural-network
-
 
 https://github.com/Dysvalence/Kaggle-Titanic
 
