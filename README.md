@@ -9,13 +9,6 @@ pip install tensorflow
 pip install tensorflow-gpu
 ```
 
-## Data Prep
-
-Step one involves visualizing, exploring and cleaning the data.
-
-### Visualization
-
-
 ### Reading
 
 This shit is awesome.
