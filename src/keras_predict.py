@@ -16,7 +16,7 @@ def train_and_predict():
     # far too much repetition, just cleaning the data for the neural net
 
     df = pd.read_csv('./data/full_train.csv')
-    train, test = train_test_split(df, test_size=0.7)
+    train, test = train_test_split(df, test_size=0.15)
 
     # print(train.head())
 
@@ -34,17 +34,15 @@ def train_and_predict():
     y_test = np_utils.to_categorical(y_test)
 
     nb_classes = 2
-    nb_epoch = 200
-    batch_size = 32
+    nb_epoch = 128
+    batch_size = 64
 
     model = Sequential()
-    model.add(Dense(32, input_shape=X_train.shape[1:]))
+    model.add(Dense(16, input_shape=X_train.shape[1:]))
+    model.add(Activation('tanh'))
+    model.add(Dense(32))
     model.add(Activation('relu'))
     model.add(Dense(64))
-    model.add(Activation('relu'))
-    model.add(Dense(128))
-    model.add(Activation('relu'))
-    model.add(Dense(256))
     model.add(Activation('relu'))
     model.add(Dense(2))
     model.add(Activation('softmax'))
