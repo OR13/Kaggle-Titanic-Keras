@@ -9,32 +9,20 @@ pip install tensorflow
 pip install tensorflow-gpu
 ```
 
-### Training Data
+## Data Prep
 
-You may need to turn:
-```
-Survived
-0
-1
-1
-0
-```
+Step one involves visualizing, exploring and cleaning the data.
 
-into
+### Visualization
 
-```
-Survived Died
-0 1
-1 0
-1 0
-0 1
-```
-
-In Excel: =IF(OR(B2,B2="1"),0,1)
-
-https://docs.google.com/spreadsheets/d/1OGfHeiLGkdHXvooDvZMt6yLnhiqyq1I-W569Mdt1UWY/edit#gid=1841073540
 
 ### Reading
+
+This shit is awesome.
+
+https://www.kaggle.com/seanhgorman/titanic/been-coding-for-a-week-lol
+
+https://www.kaggle.com/ujjwalkg/titanic/titanic-data-science-solutions
 
 https://github.com/ChaseByInfinity/titanic-neural-network
 
