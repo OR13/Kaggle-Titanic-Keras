@@ -26,6 +26,7 @@ np.random.seed(1337)  # for reproducibility
 
 model_name = 'keras_model.h5'
 
+
 def fit(model, train_X, train_y):
     model.fit(train_X, train_y)
     return model
@@ -76,10 +77,10 @@ def write_prediction(name, model, full, test_X):
     test.to_csv(name, index=False)
 
 
-
 def report_findings(full, titanic, full_X):
-    
-        # Create all datasets that are necessary to train, validate and test models
+
+        # Create all datasets that are necessary to train, validate and test
+        # models
     train_valid_X = full_X[0:891]
     train_valid_y = titanic.Survived
     test_X = full_X[891:]
@@ -176,12 +177,11 @@ def report_findings(full, titanic, full_X):
           "classifier", "train", "test", "difference"]))
 
 
-
 def train_and_predict():
     # far too much repetition, just cleaning the data for the neural net
 
     df = pd.read_csv('./data/full_train.csv')
-    train, test = train_test_split(df, test_size=0.15)
+    train, test = train_test_split(df, test_size=.05)
 
     # print(train.head())
 
@@ -199,8 +199,8 @@ def train_and_predict():
     y_test = np_utils.to_categorical(y_test)
 
     nb_classes = 2
-    nb_epoch = 128
-    batch_size = 64
+    nb_epoch = 100
+    batch_size = 10
 
     model = Sequential()
     model.add(Dense(16, input_shape=X_train.shape[1:]))
@@ -209,10 +209,13 @@ def train_and_predict():
     model.add(Activation('relu'))
     model.add(Dense(64))
     model.add(Activation('relu'))
+    model.add(Dense(128))
+    model.add(Activation('relu'))
     model.add(Dense(2))
     model.add(Activation('softmax'))
 
-    model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
+    model.compile(loss='categorical_crossentropy',
+                  optimizer='adam', metrics=['accuracy'])
 
     model.fit(X_train, y_train, batch_size=batch_size,
               nb_epoch=nb_epoch, validation_data=(X_test, y_test), verbose=2)

@@ -5,8 +5,8 @@
 conda create --name TitanicEnv
 source activate TitanicEnv
 pip install git+git://github.com/fchollet/keras.git
-pip install tensorflow
-pip install tensorflow-gpu
+pip install tensorflow --ignore-installed
+pip install tensorflow-gpu --ignore-installed
 ```
 
 
