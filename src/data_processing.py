@@ -11,8 +11,7 @@ import numpy as np
 import pandas as pd
 
 
-
-def process_raw(titanic, full):
+def clean(full, titanic):
     # Categorical to Numeric
 
     # Transform Sex into binary values 0 and 1
@@ -139,7 +138,19 @@ def process_raw(titanic, full):
 
     full_X = pd.concat([imputed, embarked, cabin, sex], axis=1)
     # print(full_X.head())
-    
+
     return full_X
 
 
+def load():
+    train = pd.read_csv("./data/train.csv")
+    test = pd.read_csv("./data/test.csv")
+
+    full = train.append(test, ignore_index=True)
+    titanic = full[:891]
+
+    del train, test
+
+    print('Datasets:', 'full:', full.shape, 'titanic:', titanic.shape)
+    
+    return full, titanic
