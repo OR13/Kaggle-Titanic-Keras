@@ -154,8 +154,7 @@ def report_findings(full, titanic, full_X):
             test_score = model.score(valid_X, valid_y)
             score = [name, train_score, test_score]
             trained_model_scores.append(score)
-
-        write_prediction(name, model, full, test_X)
+            write_prediction('./pred/' + name + '.csv', model, full, test_X)
         return trained_model_scores
 
     print()
