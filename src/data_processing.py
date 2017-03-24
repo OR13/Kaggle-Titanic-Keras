@@ -14,8 +14,11 @@ import pandas as pd
 def clean(full, titanic):
     # Categorical to Numeric
 
+    def myround(x, base=5):
+        return int(base * round(float(x)/base))
+
     # Transform Sex into binary values 0 and 1
-    sex = pd.Series(np.where(full.Sex == 'male', 1, 0), name='Sex')
+    sex = pd.Series(np.where(full.Sex == 'male', 0, 1), name='Sex')
 
     # Create a new variable for every unique value of Embarked
     embarked = pd.get_dummies(full.Embarked, prefix='Embarked')
@@ -34,8 +37,14 @@ def clean(full, titanic):
     # Fill missing values of Age with the average of Age (mean)
     imputed['Age'] = full.Age.fillna(full.Age.mean())
 
+    imputed['Age'] = imputed['Age'].map(myround)
+
     # Fill missing values of Fare with the average of Fare (mean)
     imputed['Fare'] = full.Fare.fillna(full.Fare.mean())
+   
+    imputed['Fare'] = imputed['Fare'].map(myround)
+
+    # print(imputed['Fare'].head())
 
     # print(imputed.head())
 
@@ -123,6 +132,8 @@ def clean(full, titanic):
     # passenger)
     family['FamilySize'] = full['Parch'] + full['SibSp'] + 1
 
+    # family = pd.get_dummies(family['FamilySize'], prefix='FamilySize')
+
     # introducing other features based on the family size
     family['Family_Single'] = family['FamilySize'].map(
         lambda s: 1 if s == 1 else 0)
@@ -134,9 +145,9 @@ def clean(full, titanic):
     # print(family.head())
 
     # Select which features/variables to include in the dataset from the list below:
-    # imputed , embarked , pclass , sex , family , cabin , ticket
+    # imputed , embarked , pclass , sex , family , cabin , ticket, title
 
-    full_X = pd.concat([imputed, embarked, cabin, sex], axis=1)
+    full_X = pd.concat([imputed , sex ], axis=1)
     # print(full_X.head())
 
     return full_X

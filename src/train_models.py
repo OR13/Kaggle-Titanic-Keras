@@ -176,12 +176,16 @@ def report_findings(full, titanic, full_X):
     print(tabulate(trained_model_scores, headers=[
           "classifier", "train", "test", "difference"]))
 
+    print()
+
 
 def train_and_predict():
     # far too much repetition, just cleaning the data for the neural net
 
+    print()
+
     df = pd.read_csv('./data/full_train.csv')
-    train, test = train_test_split(df, test_size=.05)
+    train, test = train_test_split(df, test_size=.02)
 
     # print(train.head())
 
@@ -199,23 +203,20 @@ def train_and_predict():
     y_test = np_utils.to_categorical(y_test)
 
     nb_classes = 2
-    nb_epoch = 100
-    batch_size = 10
+    nb_epoch = 96
+    batch_size = 32
 
     model = Sequential()
     model.add(Dense(16, input_shape=X_train.shape[1:]))
     model.add(Activation('tanh'))
     model.add(Dense(32))
     model.add(Activation('relu'))
-    model.add(Dense(64))
-    model.add(Activation('relu'))
-    model.add(Dense(128))
-    model.add(Activation('relu'))
     model.add(Dense(2))
     model.add(Activation('softmax'))
 
     model.compile(loss='categorical_crossentropy',
                   optimizer='adam', metrics=['accuracy'])
+    print()
 
     model.fit(X_train, y_train, batch_size=batch_size,
               nb_epoch=nb_epoch, validation_data=(X_test, y_test), verbose=2)
